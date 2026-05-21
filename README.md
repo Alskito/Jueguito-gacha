@@ -10,12 +10,13 @@ Visual studio code:
 Hasta ahora no he tenido ningún problema al ejecutar el código en VS Code, pero recomiendo usar la terminal de Windows por si acaso.
 
 Terminal:
+
 Hasta ahora el programa solamente ha sido probado en Windows, por lo que las instrucciones solo están pensadas para ese sistema operativo. A futuro, probaré el programa en Linux para asegurarme de que funcione en ambos OS.
 Recuerda que todos los archivos .h deben estar en la misma carpeta que el archivo main.
 
-"g++ main.cpp -o gacha"
+`g++ main.cpp -o gacha`
 
-".\gacha.exe"
+`.\gacha.exe`
 
 ## UML
 <img width="1610" height="1318" alt="Gacha-Jueguito" src="https://github.com/user-attachments/assets/d70102d8-8ee3-4209-a7e8-cd37919ddabd" />
