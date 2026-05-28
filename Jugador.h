@@ -21,7 +21,7 @@ class Jugador{
     private:
         std::string nombre;
         double moneda;
-        std::vector<Item*> inventario; //No estoy 100% seguro si esto es correcto
+        std::vector<Item*> inventario; 
         Gacha* sistema_gacha;
     public:
         Jugador(): nombre(""), moneda(0.0), sistema_gacha(NULL) {};
@@ -44,7 +44,6 @@ void Jugador::conseguir_monedas() {
 void Jugador::mostrar_inventario() {
     std::cout << "--- Inventario de " << nombre << " ---\n";
     for (size_t i = 0; i < inventario.size(); i++) {
-        // Se llama al to_string() del hijo correspondiente gracias al polimorfismo
         std::cout << inventario[i]->to_string();
     }
 }
