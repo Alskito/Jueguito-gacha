@@ -7,29 +7,14 @@
 int main() {
 
     Gacha gambling(50.0);
-
-
     Jugador player("Alskito", 500.0, &gambling);
 
-    // Sobreescritura sin polimorfismo
-    Mejoras prueba_mejoras("algo", "Raro", 25.0);
-    Reliquias prueba_reliquia("sepa", "Legendario", 15.0);
-    Multiplicador prueba_multiplicador("idk", "Epico", 2.0);
-
-    std::cout << "--- Objetos >:D ---\n";
-    std::cout << prueba_mejoras.to_string();
-    std::cout << prueba_reliquia.to_string();
-    std::cout << prueba_multiplicador.to_string();
-    std::cout << "-------------------------------\n\n";
 
 
-    /*
+
     player.agrega_mejora("algo", "Raro", 25.0);
     player.agrega_reliquia("sepa", "Legendario", 15.0);
-    player.agrega_multiplicador("idk", "Epico", 2.0);
-    */
-
-
+    player.agregar_multiplicador("idk", "Epico", 2.0);
     player.mostrar_inventario();
     
     std::cout << "\n";
