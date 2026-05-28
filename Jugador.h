@@ -30,11 +30,10 @@ class Jugador{
         void conseguir_monedas();
         void mostrar_inventario();
 
-        /*
         void agrega_mejora(std::string nom, std::string rar, double bonus);
         void agrega_reliquia(std::string nom, std::string rar, double descuento);
         void agrega_multiplicador(std::string nom, std::string rar, double porcentaje);
-        */
+      
 };
 
 void Jugador::conseguir_monedas() {
@@ -50,7 +49,6 @@ void Jugador::mostrar_inventario() {
     }
 }
 
-/*
 void Jugador::agrega_mejora(std::string nom, std::string rar, double bonus) {
     inventario.push_back(new Mejoras(nom, rar, bonus));
 }
@@ -63,7 +61,5 @@ void Jugador::agrega_multiplicador(std::string nom, std::string rar, double porc
     inventario.push_back(new Multiplicador(nom, rar, porcentaje));
 }
 
-Por ahora esto esta comentado debido a que es polimorfismo y requiero aprender a usarlo bien
-*/
 
 #endif
