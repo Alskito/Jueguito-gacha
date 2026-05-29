@@ -4,6 +4,13 @@ El propósito de este proyecto es crear un juego gacha. El jugador tendrá que c
 ## Funcionalidad
 El programa, a través de un menú, permitirá al usuario conseguir dinero, ver su inventario, gamblear en el gacha, etc. TODAVÍA HAY MUCHAS COSAS QUE QUIERO IMPLEMENTAR, COMO UN MINIJUEGO PARA CONSEGUIR EL DINERO, UN SISTEMA DE VENTA DE ITEMS, UNA MANERA DE PERDER, ETC., POR LO QUE ESTA SECCIÓN CAMBIARÁ CONSTANTEMENTE.
 
+## Casos que harían que el proyecto deje de funcionar:
+
+Fugas de memoria: Si no se implementa un destructor en la versión final y el usuario hace demasiadas tiradas, la memoria se saturará y el programa terminará crasheando.
+
+Errores de memoria: Debido al manejo de punteros, existe la posibilidad de que ocurra un acceso inválido que termine la ejecución del programa.
+
+Fallo en la lógica del juego: Actualmente el gacha no verifica la cantidad de dinero que tiene el jugador. Tengo que corregirlo, ya que el usuario podrá tirar infinitamente (incluso con saldo negativo), rompiendo todo.
 ## Consideraciones
 Visual studio code:
 
