@@ -19,7 +19,7 @@ Errores de memoria: Debido al manejo de punteros, existe la posibilidad de que o
 Entrada del usuario en el minijuego: El sistema espera que el código se ingrese con un formato específico (tres números separados por espacios). Ingresar caracteres no numéricos o formatos extraños puede romper el flujo de lectura (std::cin) y causar un mal funcionamiento.
 
 ## Consideraciones
-SEGUIR LAS INSTRUCCIUONES
+SEGUIR LAS INSTRUCCIONES
 
 Visual studio code:
 Hasta ahora no he tenido ningún problema al ejecutar el código en VS Code, pero recomiendo usar la terminal de Windows por si acaso.
