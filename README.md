@@ -36,6 +36,7 @@ Windows
 `.\gacha.exe`
 
 Linux:
+
 `g++ main.cpp -o gacha`
 
 `./gacha`
