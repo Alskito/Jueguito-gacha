@@ -26,12 +26,19 @@ Hasta ahora no he tenido ningún problema al ejecutar el código en VS Code, per
 
 Terminal:
 
-El archivo debería funcionar tanto en Windows como en Linux (también en Mac, pero dudo que alguien lo haga...). Juraría que para compilar en Linux es exactamente igual que en Windows, por lo que las instrucciones de abajo deberían servir para ambos; en el caso de Mac, no tengo idea de cómo se haría.
+El archivo debería funcionar tanto en Windows como en Linux (también en Mac, pero dudo que alguien lo haga...). En el caso de Mac, no tengo idea de cómo se haría.
 Recuerda que todos los archivos .h deben estar en la misma carpeta que el archivo main.
+
+Windows
 
 `g++ main.cpp -o gacha`
 
 `.\gacha.exe`
+
+Linux:
+`g++ main.cpp -o gacha`
+
+`./gacha`
 
 ## UML
 <img width="1738" height="1426" alt="UML" src="https://github.com/user-attachments/assets/79cf6d2f-d191-4194-9301-5459f58e75d6" />
