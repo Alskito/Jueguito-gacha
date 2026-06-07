@@ -7,7 +7,7 @@
 
  /*
  * Clase Gacha controla el sistema de recompensas aleatorias.
- * Se encarga de generar los objetos, calcular probabilidades 
+ * Se encarga de generar los objetos, calcular probabilidades
  * y manejar los costos de cada tirada.
  *
  */
@@ -24,10 +24,10 @@
 #include "Herramienta.h"
 
 
-class Gacha{ 
+class Gacha{
     private: // Se declaran los atributos
         // Costo base por cada tirada del gacha
-        double precio_tirada; 
+        double precio_tirada;
 
     public: // Se declaran los metodos
         /**
@@ -53,7 +53,7 @@ class Gacha{
         void set_precio_tirada(double);
 
         void mostrar_probabilidades();
-        Item* tirar(); 
+        Item* tirar();
         std::vector<Item*> tirar(int cantidad);
 };
 
@@ -78,19 +78,20 @@ void Gacha::set_precio_tirada(double pre){
 }
 
 /**
- * Imprime en consola las probabilidades de obtener 
+ * Imprime en consola las probabilidades de obtener
  * las distintas rarezas (Comun, Raro, Epico, Legendario).
  *
  * @param
  * @return
  */
 void Gacha::mostrar_probabilidades() {
-    std::cout << "Probabilidades: Comun 70%, Raro 20%, Epico 8%, Legendario 2%.\n";
+    std::cout << "Probabilidades: Comun 70%, Raro 20%, "
+              << "Epico 8%, Legendario 2%.\n";
 }
 
 /**
  * Realiza una tirada en el gacha.
- * Genera un nombre y determina la rareza basada en probabilidades 
+ * Genera un nombre y determina la rareza basada en probabilidades
  * y crea dinamicamente un objeto (Mejora, Reliquia o Herramienta).
  *
  * @param
@@ -98,41 +99,55 @@ void Gacha::mostrar_probabilidades() {
  */
 Item* Gacha::tirar() {
     //Lista de palabras para crear objetos
-    std::string palabras1[] = {"Cristal", "Amuleto", "Anillo", "Fragmento", "Artefacto"};
-    std::string palabras2[] = {"Mistico", "Antiguo", "Roto", "Luminoso", "Oscuro"};
-    std::string palabras3[] = {"del Rey", "del Caos", "del Vacio", "de los Dioses", "del Abismo"};
-    // Selecciona una palabra aleatoria de cada arreglo (rand() % 5 da un número entre 0 y 4) y las une con espacios.
-    std::string nombre_gen = palabras1[rand() % 5] + " " + palabras2[rand() % 5] + " " + palabras3[rand() % 5];
-    int dado = (rand() % 100) + 1;  // Tira un "dado" de 100 caras (genera de 1 a 100)
+    std::string palabras1[] = {"Cristal", "Amuleto", "Anillo",
+                               "Fragmento", "Artefacto"};
+    std::string palabras2[] = {"Mistico", "Antiguo", "Roto",
+                               "Luminoso", "Oscuro"};
+    std::string palabras3[] = {"del Rey", "del Caos", "del Vacio",
+                               "de los Dioses", "del Abismo"};
+
+    // Selecciona una palabra aleatoria de cada arreglo
+    // rand() % 5 da un número entre 0 y 4, y las une con espacios.
+    std::string nombre_gen = palabras1[rand() % 5] + " " +
+                             palabras2[rand() % 5] + " " +
+                             palabras3[rand() % 5];
+    // Tira un "dado" de 100 caras (genera un numero del 1 a 100)
+    int dado = (rand() % 100) + 1;
     std::string rareza_gen; // Variable para almacenar la rareza obtenida.
     double buff_poder = 1.0; // Multiplicador de estadística base del item.
 
     if (dado <= 70) {
         rareza_gen = "Comun";
         buff_poder = 1.0;
-    } else if (dado <= 90) { 
+    } else if (dado <= 90) {
         rareza_gen = "Raro";
         buff_poder = 2.5;
-    } else if (dado <= 98) { 
+    } else if (dado <= 98) {
         rareza_gen = "Epico";
         buff_poder = 5.0;
-    } else {                 
+    } else {
         rareza_gen = "Legendario";
         buff_poder = 15.0;
     }
 
-    int tipo = rand() % 3; // Genera 0, 1 o 2 para decidir que clase hija va a ser
-    Item* nuevo_item = nullptr; // Inicializa un puntero vacío de la clase padre
+    // Genera 0, 1 o 2 para decidir de que clase hija va a ser el objeto
+    int tipo = rand() % 3;
+    // Inicializa un puntero vacío de la clase padre
+    Item* nuevo_item = nullptr;
 
     if (tipo == 0) {
-        nuevo_item = new Mejoras(nombre_gen, rareza_gen, 10.0 * buff_poder);
+        nuevo_item = new Mejoras(nombre_gen, rareza_gen,
+                                 10.0 * buff_poder);
     } else if (tipo == 1) {
-        nuevo_item = new Reliquias(nombre_gen, rareza_gen, 2.0 * buff_poder);
+        nuevo_item = new Reliquias(nombre_gen, rareza_gen,
+                                   2.0 * buff_poder);
     } else {
-        nuevo_item = new Herramienta (nombre_gen, rareza_gen, 1 * (int)buff_poder);
+        nuevo_item = new Herramienta (nombre_gen, rareza_gen,
+                                      1 * (int)buff_poder);
     }
 
-    std::cout << "Has obtenido: " << nombre_gen << " (" << rareza_gen << ")!\n";
+    std::cout << "Has obtenido: " << nombre_gen << " ("
+                                  << rareza_gen << ")!\n";
     return nuevo_item;
 }
 
@@ -147,7 +162,7 @@ std::vector<Item*> Gacha::tirar(int cantidad) {
     std::vector<Item*> resultados;
     std::cout << "\nTirada multiple de " << cantidad << " deseos...\n";
     for(int i = 0; i < cantidad; i++) {
-        resultados.push_back(tirar()); 
+        resultados.push_back(tirar());
     }
     return resultados;
 }
