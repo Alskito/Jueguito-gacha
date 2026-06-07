@@ -14,7 +14,7 @@
 
  #ifndef RELIQUIAS_H_
  #define RELIQUIAS_H_
- 
+
  #include "Item.h"
 
  class Reliquias : public Item {
@@ -34,14 +34,15 @@
 
         /**
          * Constructor con parametros
-         * Llama al constructor de Item con nombre y rareza, e inicializa el descuento.
+         * Llama al constructor de Item con nombre y rareza,
+         * e inicializa el descuento.
          *
          * @param nom Nombre de la reliquia
          * @param rar Rareza de la reliquia
          * @param desc Cantidad a descontar
          * @return Objeto Reliquias
          */
-        Reliquias(std::string nom, std::string rar, double desc) 
+        Reliquias(std::string nom, std::string rar, double desc)
         : Item(nom, rar), descuento_gacha(desc) {};
 
         double get_descuento_gacha();
@@ -51,8 +52,8 @@
         double aplicar_efecto();
         std::string get_tipo();
         std::string to_string();
-        
-    
+
+
  };
 
 /**
@@ -93,8 +94,8 @@
  * @param
  * @return String con la palabra "Reliquia"
  */
- std::string Reliquias::get_tipo() { 
-    return "Reliquia"; 
+ std::string Reliquias::get_tipo() {
+    return "Reliquia";
  }
 
  /**
@@ -105,11 +106,9 @@
  */
 std::string Reliquias::to_string() {
     std::stringstream aux;
-    aux << "Reliquia: " << nombre << " | Rareza: " << rareza 
+    aux << "Reliquia: " << nombre << " | Rareza: " << rareza
         << " | Descuento: -" << descuento_gacha << "%\n";
     return aux.str();
-} 
+}
 
 #endif
-
-
