@@ -42,6 +42,7 @@ Linux:
 `./gacha`
 
 ## UML
-<img width="1738" height="1426" alt="UML" src="https://github.com/user-attachments/assets/79cf6d2f-d191-4194-9301-5459f58e75d6" />
+<img width="2106" height="1426" alt="UML" src="https://github.com/user-attachments/assets/57aa74c7-6427-4676-8737-815bcfb32538" />
+
 
 
