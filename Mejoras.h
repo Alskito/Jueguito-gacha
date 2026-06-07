@@ -13,7 +13,7 @@
  */
  #ifndef MEJORAS_H_
  #define MEJORAS_H_
- 
+
  #include "Item.h"
 
  class Mejoras : public Item {
@@ -33,14 +33,15 @@
 
         /**
          * Constructor con parametros
-         * Llama al constructor de Item con nombre y rareza, e inicializa el bonus.
+         * Llama al constructor de Item con nombre y rareza,
+         * e inicializa el bonus.
          *
          * @param nom Nombre de la mejora
          * @param rar Rareza de la mejora
          * @param bon Cantidad de bonus de monedas
          * @return Objeto Mejoras
          */
-        Mejoras(std::string nom, std::string rar, double bon) 
+        Mejoras(std::string nom, std::string rar, double bon)
         : Item(nom, rar), bonus_monedas(bon) {};
 
         double get_bonus_monedas();
@@ -50,7 +51,7 @@
         double aplicar_efecto();
         std::string get_tipo();
         std::string to_string();
-    
+
  };
 
  /**
@@ -91,8 +92,8 @@ double Mejoras::aplicar_efecto() {
  * @param
  * @return String con la palabra "Mejora"
  */
- std::string Mejoras::get_tipo() { 
-    return "Mejora"; 
+ std::string Mejoras::get_tipo() {
+    return "Mejora";
  }
 
  /**
@@ -103,7 +104,7 @@ double Mejoras::aplicar_efecto() {
  */
 std::string Mejoras::to_string() {
     std::stringstream aux;
-    aux << "Mejora: " << nombre << " | Rareza: " << rareza 
+    aux << "Mejora: " << nombre << " | Rareza: " << rareza
         << " | Bonus: +" << bonus_monedas << " monedas.\n";
     return aux.str();
 }
