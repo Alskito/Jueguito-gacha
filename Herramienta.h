@@ -33,14 +33,15 @@
 
         /**
          * Constructor con parametros
-         * Llama al constructor de Item con nombre y rareza, e inicializa intentos_extra.
+         * Llama al constructor de Item con nombre y rareza,
+         * e inicializa intentos_extra.
          *
          * @param nom Nombre de la herramienta
          * @param rar Rareza de la herramienta
          * @param inten Cantidad de intentos extra
          * @return Objeto Herramienta
          */
-        Herramienta(std::string nom, std::string rar, int inten) 
+        Herramienta(std::string nom, std::string rar, int inten)
         : Item(nom, rar), intentos_extra(inten) {};
 
         double get_intentos_extra();
@@ -48,16 +49,17 @@
         void set_intentos_extra(int);
 
         double aplicar_efecto();
-        std::string get_tipo(); 
+        std::string get_tipo();
         std::string to_string();
-    
+
  };
 
  /**
  * Devuelve la cantidad de intentos extra que da la herramienta.
  *
  * @param
- * @return Double con los intentos extra (se maneja como double por el polimorfismo)
+ * @return Double con los intentos extra
+ * se maneja como double por el polimorfismo
  */
  double Herramienta::get_intentos_extra(){
         return intentos_extra;
@@ -83,7 +85,7 @@
  double Herramienta::aplicar_efecto() {
         return intentos_extra;
  }
- 
+
  /**
  * Metodo sobreescrito de la clase Item.
  * Identifica el tipo especifico de la clase hija.
@@ -92,7 +94,7 @@
  * @return String con la palabra "Herramienta"
  */
  std::string Herramienta::get_tipo(){
-    return "Herramienta"; 
+    return "Herramienta";
  }
 
  /**
@@ -103,7 +105,7 @@
  */
 std::string Herramienta::to_string() {
     std::stringstream aux;
-    aux << "Herramienta: " << nombre << " | Rareza: " << rareza 
+    aux << "Herramienta: " << nombre << " | Rareza: " << rareza
         << " | Efecto: +" << intentos_extra << " intentos de robo\n";
     return aux.str();
 }
