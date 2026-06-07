@@ -7,14 +7,14 @@
 
 /*
  * Main del projecto, ejecuta el juego.
- * Contiene el flujo principal, el menu de opciones interactivo 
+ * Contiene el flujo principal, el menu de opciones interactivo
  * y la instanciacion de los objetos Jugador, Gacha y Robar.
  *
  */
 
 
 #include <iostream>
-#include <cstdlib> 
+#include <cstdlib>
 #include <ctime>
 #include <string>
 #include "Gacha.h"
@@ -27,7 +27,7 @@
 
 /**
  * Limpia la consola para mantener una interfaz limpia.
- * Ejecutar "cls" en Windows 
+ * Ejecutar "cls" en Windows
  * o "clear" en otros sistemas.
  *
  * @param
@@ -37,24 +37,25 @@ void limpiar_pantalla() {
 #ifdef _WIN32
     system("cls");
 #else
-    system("clear"); 
+    system("clear");
 #endif
 }
 
 int main() {
 
     #ifdef _WIN32
-        SetConsoleOutputCP(CP_UTF8); 
+        SetConsoleOutputCP(CP_UTF8);
     #endif
 
-    // Semilla generadora: hace que los números de rand() cambien en cada ejecución basada en el reloj de la compu.
+    // Semilla generadora: hace que los números de rand()
+    // cambien en cada ejecución basada en el reloj de la compu.
     srand(time(NULL));
 
-    std::cout << "\033[1;36m"; 
+    std::cout << "\033[1;36m";
     std::cout << "==========================================\n";
     std::cout << "     .𖥔 ݁ ˖๋ ࣭ ⭑   GACHA  .𖥔 ݁ ˖๋ ࣭ ⭑    \n";
     std::cout << "==========================================\n";
-    std::cout << "\033[0m"; 
+    std::cout << "\033[0m";
 
     std::string nombre;
     std::cout << "Ingresa tu nombre: ";
@@ -68,14 +69,20 @@ int main() {
 
     // Un poco de lore
     std::cout << "====================================\n";
-    std::cout << " Eres una persona promedio. Sin embargo, todo cambio cuando descubriste\n";
-    std::cout << " un pequeño juego llamado \033[1;35m'Gonshin Impacto'\033[0m (perdon, la falta de originalidad).\n\n";
-    std::cout << " Te volviste un adicto sin remedio a su sistema gacha. Gastaste hasta el\n";
-    std::cout << " ultimo centavo y ahora no tienes dinero. En tu total desesperacion, has\n";
-    std::cout << " decidido abandonar la moralidad y \033[1;31mrecurrir al robo\033[0m.\n";
+    std::cout << " Eres una persona promedio. Sin embargo, "
+              << "todo cambio cuando descubriste\n";
+    std::cout << " un pequeño juego llamado \033[1;35m'Gonshin Impacto'\033[0m"
+              << "(perdon, la falta de originalidad).\n\n";
+    std::cout << " Te volviste un adicto sin remedio a su sistema gacha. "
+              << "Gastaste hasta el\n";
+    std::cout << " ultimo centavo y ahora no tienes dinero. "
+              << "En tu total desesperacion, has\n";
+    std::cout << " decidido abandonar la moralidad y "
+              << "\033[1;31mrecurrir al robo\033[0m.\n";
     std::cout << "====================================\n";
     std::cin.ignore();
-    std::cout << "\n\033[1;33mPresiona ENTER para comenzar tu vida criminal...\033[0m";
+    std::cout << "\n\033[1;33mPresiona ENTER para "
+              << "comenzar tu vida criminal...\033[0m";
     std::cin.get();
 
     int opcion = 0;
@@ -85,7 +92,8 @@ int main() {
         limpiar_pantalla();
         // Condicion de derrota
         if (player.get_moneda() <= 0) {
-            std::cout << "\n\033[1;31m=== BANCARROTA ===\nTe has quedado sin dinero. GAME OVER.\033[0m\n";
+            std::cout << "\n\033[1;31m=== BANCARROTA ===\n"
+                      << "Te has quedado sin dinero. GAME OVER.\033[0m\n";
             break;
         }
         // Se calcula el costo del gacha para mostrar en la interfaz
@@ -99,23 +107,28 @@ int main() {
         }
 
         // Menu principal
-        std::cout << "\n\033[1;36m------------------------------------------\033[0m\n";
-        std::cout << "  \033[1;33mBALANCE:\033[0m \033[1;32m" << player.get_moneda() << "\033[0m monedas\n";
-        std::cout << "\033[1;36m------------------------------------------\033[0m\n";
+        std::cout << "\n\033[1;36m----------------------"
+                  << "--------------------\033[0m\n";
+        std::cout << "  \033[1;33mBALANCE:\033[0m \033[1;32m"
+                  << player.get_moneda() << "\033[0m monedas\n";
+        std::cout << "\033[1;36m------------------"
+                  << "------------------------\033[0m\n";
         std::cout << "Que deseas hacer?\n";
         std::cout << "  \033[1;31m[1]\033[0m Robar\n";
-        std::cout << "  \033[1;35m[2]\033[0m Tirar en el Gacha (" << costo_actual_gacha << " monedas)\n";
+        std::cout << "  \033[1;35m[2]\033[0m Tirar en el Gacha ("
+                  << costo_actual_gacha << " monedas)\n";
         std::cout << "  \033[1;34m[3]\033[0m Ver mi Inventario\n";
         std::cout << "  \033[1;37m[4]\033[0m Salir del juego\n";
         std::cout << "Elige una opcion (1-4): ";
-        
+
         std::cin >> opcion;
         limpiar_pantalla();
 
         switch (opcion) {
             case 1:
-                minijuego_caja.jugar(player); 
-                std::cout << "\n\033[1;33mPresiona ENTER para volver al menú principal\033[0m";
+                minijuego_caja.jugar(player);
+                std::cout << "\n\033[1;33mPresiona ENTER para "
+                          << "volver al menú principal\033[0m";
                 std::cin.ignore();
                 std::cin.get();
                 break;
@@ -123,11 +136,13 @@ int main() {
             case 2: {
                 int cantidad;
                 gambling.mostrar_probabilidades();
-                std::cout << "¿Cuantas tiradas quieres hacer? (" << costo_actual_gacha << " c/u): ";
+                std::cout << "¿Cuantas tiradas quieres hacer? ("
+                          << costo_actual_gacha << " c/u): ";
                 std::cin >> cantidad;
                 if (cantidad > 0) player.apostar_en_gacha(cantidad);
 
-                std::cout << "\n\033[1;33mPresiona ENTER para volver al menú principal\033[0m";
+                std::cout << "\n\033[1;33mPresiona ENTER "
+                          << "para volver al menú principal\033[0m";
                 std::cin.ignore();
                 std::cin.get();
                 break;
@@ -135,7 +150,8 @@ int main() {
 
             case 3:
                 player.mostrar_inventario();
-                std::cout << "\n\033[1;33mPresiona ENTER para volver al menú principal\033[0m";
+                std::cout << "\n\033[1;33mPresiona ENTER "
+                          << "para volver al menú principal\033[0m";
                 std::cin.ignore();
                 std::cin.get();
                 break;
@@ -166,12 +182,14 @@ int main() {
                 std::cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⠀⠀⢸⢸⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n";
                 std::cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⡶⣶⡟⠘⡤⢤⣾⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n";
                 std::cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠉⠁⠀⠛⠛⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n";
-                std::cout << "\n\033[1;32m¡Gracias por jugar, " << nombre << ".... Benji no me repruebe\033[0m\n";
+                std::cout << "\n\033[1;32m¡Gracias por jugar, " << nombre
+                          << ".... Benji no me repruebe\033[0m\n";
                 break;
 
             default:
                 std::cout << "\033[1;31mOpcion no valida.\033[0m\n";
-                std::cout << "\n\033[1;33mPresiona ENTER para volver al menú principal\033[0m";
+                std::cout << "\n\033[1;33mPresiona ENTER "
+                          << "para volver al menú principal\033[0m";
                 std::cin.ignore();
                 std::cin.get();
                 break;
