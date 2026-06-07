@@ -29,8 +29,9 @@ class Jugador{
         std::string nombre;
         // Cantidad de dinero disponible para apostar
         double moneda;
-        // Vector polimorfico que almacena los Items ganados (Mejoras, Reliquias, Herramientas)
-        std::vector<Item*> inventario; 
+        // Vector polimorfico que almacena los Items ganados
+        // (Mejoras, Reliquias, Herramientas)
+        std::vector<Item*> inventario;
         // Puntero para interactuar con el sistema gacha
         Gacha* sistema_gacha;
 
@@ -46,14 +47,17 @@ class Jugador{
 
         /**
          * Constructor con parametros
-         * Inicializa el jugador con un nombre, monedas iniciales y conexion al gacha.
+         * Inicializa el jugador con un nombre,
+         * monedas iniciales y conexion al gacha.
          *
          * @param nom Nombre del jugador
          * @param mon Monedas iniciales
          * @param gacha Puntero al objeto Gacha global
          * @return Objeto Jugador
          */
-        Jugador(std::string nom, double mon, Gacha* gacha): nombre(nom), moneda(mon), sistema_gacha(gacha) {};
+        Jugador(std::string nom, double mon, Gacha* gacha)
+        : nombre(nom), moneda(mon), sistema_gacha(gacha) {};
+
         /**
          * Destructor
          * Libera la memoria de los punteros guardados en el inventario
@@ -86,8 +90,8 @@ class Jugador{
  * @param
  * @return Double con las monedas
  */
-double Jugador::get_moneda() { 
-    return moneda; 
+double Jugador::get_moneda() {
+    return moneda;
 }
 
 /**
@@ -96,8 +100,8 @@ double Jugador::get_moneda() {
  * @param cantidad Monto a sumar
  * @return
  */
-void Jugador::sumar_monedas(double cantidad) { 
-    moneda += (cantidad); 
+void Jugador::sumar_monedas(double cantidad) {
+    moneda += (cantidad);
 }
 
 /**
@@ -106,8 +110,8 @@ void Jugador::sumar_monedas(double cantidad) {
  * @param cantidad Monto a restar
  * @return
  */
-void Jugador::restar_monedas(double cantidad) { 
-    moneda -= cantidad; 
+void Jugador::restar_monedas(double cantidad) {
+    moneda -= cantidad;
 }
 
 /**
@@ -137,16 +141,17 @@ void Jugador::apostar_en_gacha(int cantidad_tiradas) {
     double costo_final_por_tirada = costo_base - descuento;
 
     if (costo_final_por_tirada < 5.0) {
-        costo_final_por_tirada = 5.0; 
+        costo_final_por_tirada = 5.0;
     }
     double costo_total = costo_final_por_tirada * cantidad_tiradas;
 
     if (moneda >= costo_total) {
-        moneda -= costo_total; 
-        std::cout << "\n" << nombre << " pago " << costo_total << " monedas. Monedas restantes: " << moneda << "\n";
-        
+        moneda -= costo_total;
+        std::cout << "\n" << nombre << " pago " << costo_total
+                  << " monedas. Monedas restantes: " << moneda << "\n";
+
         if (cantidad_tiradas == 1) {
-            inventario.push_back(sistema_gacha->tirar()); 
+            inventario.push_back(sistema_gacha->tirar());
         } else {
             std::vector<Item*> premios = sistema_gacha->tirar(cantidad_tiradas);
             for (int i = 0; i < premios.size(); i++) {
@@ -155,13 +160,14 @@ void Jugador::apostar_en_gacha(int cantidad_tiradas) {
         }
 
     } else {
-        std::cout << "\n" << nombre << ", no tienes suficientes monedas para " 
-                  << cantidad_tiradas << " tiradas. Ocupas " << costo_total << " monedas POBRE >:(.\n";
+        std::cout << "\n" << nombre << ", no tienes suficientes monedas para "
+                  << cantidad_tiradas << " tiradas. Ocupas "
+                  << costo_total << " monedas POBRE >:(.\n";
     }
 }
 
 /**
- * Recorre el inventario buscando items de tipo "Reliquia" y 
+ * Recorre el inventario buscando items de tipo "Reliquia" y
  * suma sus efectos para calcular el descuento total acumulado.
  *
  * @param
@@ -178,7 +184,7 @@ double Jugador::obtener_descuento_gacha() {
 }
 
 /**
- * Recorre el inventario buscando items de tipo "Mejora" y 
+ * Recorre el inventario buscando items de tipo "Mejora" y
  * suma sus efectos para calcular el bonus total acumulado.
  *
  * @param
@@ -195,7 +201,7 @@ double Jugador::obtener_bonus_monedas() {
 }
 
 /**
- * Recorre el inventario buscando items de tipo "Herramienta" y 
+ * Recorre el inventario buscando items de tipo "Herramienta" y
  * suma sus efectos para calcular los intentos extra totales.
  *
  * @param
