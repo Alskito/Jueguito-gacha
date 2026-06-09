@@ -63,7 +63,7 @@ int main() {
 
     // Se instancian los objetos principales del juego
     Gacha gambling(100.0);
-    Jugador player(nombre, 100.0, &gambling);
+    Jugador player(nombre, 100.0);
     Robar minijuego_caja;
     limpiar_pantalla();
 
@@ -139,7 +139,33 @@ int main() {
                 std::cout << "¿Cuantas tiradas quieres hacer? ("
                           << costo_actual_gacha << " c/u): ";
                 std::cin >> cantidad;
-                if (cantidad > 0) player.apostar_en_gacha(cantidad);
+                
+                if (cantidad > 0) {
+                    double costo_total = costo_actual_gacha * cantidad;
+                    
+                    if (player.get_moneda() >= costo_total) {
+                        player.restar_monedas(costo_total);
+                        std::cout << "\n" << nombre << " pago " << costo_total
+                                  << " monedas. Monedas restantes: " 
+                                  << player.get_moneda() << "\n";
+                        
+                        if (cantidad == 1) {
+                            player.agregar_al_inventario(gambling.tirar());
+                        } else {
+                            std::vector<Item*> premios = 
+                                gambling.tirar(cantidad);
+                        
+                            for (int i = 0; i < premios.size(); i++) {
+                                player.agregar_al_inventario(premios[i]);
+                            }
+                        }
+                    } else {
+                        std::cout << "\n" << nombre 
+                                  << ", no tienes suficientes monedas "
+                                  << "para " << cantidad << " tiradas. Ocupas "
+                                  << costo_total << " monedas POBRE >:(.\n";
+                    }
+                }
 
                 std::cout << "\n\033[1;33mPresiona ENTER "
                           << "para volver al menú principal\033[0m";
