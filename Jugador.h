@@ -21,7 +21,6 @@
 #include "Mejoras.h"
 #include "Herramienta.h"
 #include "Reliquias.h"
-#include "Gacha.h"
 
 class Jugador{
     private: // Se declaran los atributos
@@ -32,31 +31,28 @@ class Jugador{
         // Vector polimorfico que almacena los Items ganados
         // (Mejoras, Reliquias, Herramientas)
         std::vector<Item*> inventario;
-        // Puntero para interactuar con el sistema gacha
-        Gacha* sistema_gacha;
 
     public: // Se declaran los metodos
         /**
          * Constructor por default
-         * Inicializa nombre vacio, monedas en 0 y puntero nulo para el gacha.
+         * Inicializa nombre vacio y monedas en 0 
          *
          * @param
          * @return Objeto Jugador
          */
-        Jugador(): nombre(""), moneda(0.0), sistema_gacha(nullptr) {};
+        Jugador(): nombre(""), moneda(0.0) {};
 
         /**
          * Constructor con parametros
-         * Inicializa el jugador con un nombre,
-         * monedas iniciales y conexion al gacha.
+         * Inicializa el jugador con un nombre y
+         * monedas iniciales.
          *
          * @param nom Nombre del jugador
          * @param mon Monedas iniciales
-         * @param gacha Puntero al objeto Gacha global
          * @return Objeto Jugador
          */
-        Jugador(std::string nom, double mon, Gacha* gacha)
-        : nombre(nom), moneda(mon), sistema_gacha(gacha) {};
+        Jugador(std::string nom, double mon)
+        : nombre(nom), moneda(mon) {};
 
         /**
          * Destructor
@@ -76,8 +72,8 @@ class Jugador{
 
         void sumar_monedas(double cantidad);
         void restar_monedas(double cantidad);
+        void agregar_al_inventario(Item* nuevo_item);
         void mostrar_inventario();
-        void apostar_en_gacha(int cantidad_tiradas);
 
         double obtener_descuento_gacha();
         double obtener_bonus_monedas();
@@ -115,6 +111,15 @@ void Jugador::restar_monedas(double cantidad) {
 }
 
 /**
+ * Agrega un item al inventario del jugador
+ * @param nuevo_item Puntero a un objeto de tipo Item que se va a agregar.
+ * @return
+*/
+    void Jugador::agregar_al_inventario(Item* nuevo_item) {
+        inventario.push_back(nuevo_item);
+}
+
+/**
  * Recorre el vector del inventario e imprime en pantalla
  * la informacion (to_string) de todos los items almacenados.
  *
@@ -125,44 +130,6 @@ void Jugador::mostrar_inventario() {
     std::cout << "--- Inventario de " << nombre << " ---\n";
     for (size_t i = 0; i < inventario.size(); i++) {
         std::cout << inventario[i]->to_string();
-    }
-}
-
-/**
- * Cobra el precio al jugador y genera Items desde el gacha para
- * agregarlos al inventario. Calcula los costos aplicando descuentos.
- *
- * @param cantidad_tiradas El numero de veces que se tirara en el gacha
- * @return
- */
-void Jugador::apostar_en_gacha(int cantidad_tiradas) {
-    double costo_base = sistema_gacha->get_precio_tirada();
-    double descuento = obtener_descuento_gacha();
-    double costo_final_por_tirada = costo_base - descuento;
-
-    if (costo_final_por_tirada < 5.0) {
-        costo_final_por_tirada = 5.0;
-    }
-    double costo_total = costo_final_por_tirada * cantidad_tiradas;
-
-    if (moneda >= costo_total) {
-        moneda -= costo_total;
-        std::cout << "\n" << nombre << " pago " << costo_total
-                  << " monedas. Monedas restantes: " << moneda << "\n";
-
-        if (cantidad_tiradas == 1) {
-            inventario.push_back(sistema_gacha->tirar());
-        } else {
-            std::vector<Item*> premios = sistema_gacha->tirar(cantidad_tiradas);
-            for (int i = 0; i < premios.size(); i++) {
-                inventario.push_back(premios[i]);
-            }
-        }
-
-    } else {
-        std::cout << "\n" << nombre << ", no tienes suficientes monedas para "
-                  << cantidad_tiradas << " tiradas. Ocupas "
-                  << costo_total << " monedas POBRE >:(.\n";
     }
 }
 
